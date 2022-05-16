@@ -9,28 +9,18 @@ import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 
-class BeerRepositoryImplTest{
+class BeerRepositoryImplTest {
     private val apiService: ApiService = mockk()
-    private val beer : Beer = mockk()
-    private val page = 1
-    private val perPage = 25
-    private val id = 2
+    private val beer: Beer = mockk()
+    private val id = 1
 
     private lateinit var subject: BeerRepositoryImpl
 
     @Before
     fun setUp() {
-        every { apiService.getBeers(any(),any()) }.returns(Single.just(listOf(beer)))
         every { apiService.getBeerById(any()) }.returns(Single.just(listOf(beer)))
 
         subject = BeerRepositoryImpl(apiService)
-    }
-
-    @Test
-    fun getBeers_callServiceGerBeers() {
-        subject.getBeers(page)
-
-        verify { apiService.getBeers(page, perPage) }
     }
 
     @Test

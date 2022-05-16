@@ -8,6 +8,7 @@ import com.example.jamesli.beers.domain.usecase.GetBeerByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,8 +22,9 @@ class BeerDetailViewModel @Inject constructor(
 
     fun getBeerById(id: Int) {
         val disposable = getBeerByIdUseCase(id)
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { it -> _beerDetail.value = it }
+            .subscribe({ _beerDetail.value = it }, { it.printStackTrace() })
         compositeDisposable.add(disposable)
     }
 

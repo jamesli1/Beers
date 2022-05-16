@@ -10,6 +10,5 @@ class GetBeerByIdUseCase @Inject constructor(private val repository: BeerReposit
     operator fun invoke(id: Int): Single<Beer> {
         return repository.getBeerById(id = id)
             .map { it.first()}
-            .subscribeOn(Schedulers.io())
     }
 }

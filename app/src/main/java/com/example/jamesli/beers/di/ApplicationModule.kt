@@ -3,6 +3,7 @@ package com.example.jamesli.beers.di
 import com.example.jamesli.beers.data.api.ApiService
 import com.example.jamesli.beers.data.repository.BeerRepository
 import com.example.jamesli.beers.data.repository.BeerRepositoryImpl
+import com.example.jamesli.beers.util.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,10 +19,6 @@ class ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideBaseUrl() = "https://api.punkapi.com/v2/"
-
-    @Singleton
-    @Provides
     fun provideRxJava2CallAdapterFactory(): RxJava2CallAdapterFactory {
         return RxJava2CallAdapterFactory.create()
     }
@@ -29,13 +26,12 @@ class ApplicationModule {
     @Singleton
     @Provides
     fun provideRetrofit(
-        rxJava2CallAdapterFactory: RxJava2CallAdapterFactory,
-        baseUrl: String
+        rxJava2CallAdapterFactory: RxJava2CallAdapterFactory
     ): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(rxJava2CallAdapterFactory)
-            .baseUrl(baseUrl)
+            .baseUrl(BASE_URL)
             .build()
     }
 
