@@ -1,6 +1,9 @@
 package com.example.jamesli.beers.di
 
+import androidx.paging.ExperimentalPagingApi
 import com.example.jamesli.beers.data.api.ApiService
+import com.example.jamesli.beers.data.db.BeerDatabase
+import com.example.jamesli.beers.data.repository.BeerRemoteMediator
 import com.example.jamesli.beers.data.repository.BeerRepository
 import com.example.jamesli.beers.data.repository.BeerRepositoryImpl
 import com.example.jamesli.beers.util.BASE_URL
@@ -41,9 +44,10 @@ class ApplicationModule {
         return retrofit.create(ApiService::class.java)
     }
 
+    @ExperimentalPagingApi
     @Singleton
     @Provides
-    fun provideBeerRepository(api: ApiService): BeerRepository {
-        return BeerRepositoryImpl(api)
+    fun provideBeerRepository(api: ApiService, beerDatabase: BeerDatabase, beerRemoteMediator: BeerRemoteMediator): BeerRepository {
+        return BeerRepositoryImpl(api, beerDatabase, beerRemoteMediator)
     }
 }
