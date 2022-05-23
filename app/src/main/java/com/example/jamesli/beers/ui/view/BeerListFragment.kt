@@ -30,7 +30,6 @@ class BeerListFragment : Fragment() {
             container,
             false
         ).apply {
-            viewModel = beerListViewModel
             lifecycleOwner = viewLifecycleOwner
             setRecyclerView(this)
         }

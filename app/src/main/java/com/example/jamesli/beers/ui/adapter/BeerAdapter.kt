@@ -11,7 +11,7 @@ import com.example.jamesli.beers.databinding.ListItemBinding
 
 class BeerAdapter : RecyclerView.Adapter<BeerAdapter.ListItemViewHolder>() {
 
-    private var binding: ListItemBinding? = null
+    private lateinit var binding: ListItemBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
         binding = ListItemBinding.inflate(
@@ -19,7 +19,7 @@ class BeerAdapter : RecyclerView.Adapter<BeerAdapter.ListItemViewHolder>() {
             parent,
             false
         )
-        return ListItemViewHolder(requireNotNull(binding))
+        return ListItemViewHolder(binding)
     }
 
     class ListItemViewHolder(itemBinding: ListItemBinding) :
@@ -35,15 +35,15 @@ class BeerAdapter : RecyclerView.Adapter<BeerAdapter.ListItemViewHolder>() {
         }
     }
 
-    val differ = AsyncListDiffer(this, differCallback)
+    private val differ = AsyncListDiffer(this, differCallback)
 
     override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
         val beer = differ.currentList[position]
         holder.itemView.apply {
-            binding?.itemTitle?.text = beer.name
-            binding?.itemDescription?.text = beer.tagline
-            binding?.let {
-                binding?.itemImage?.let { image ->
+            binding.itemTitle.text = beer.name
+            binding.itemDescription.text = beer.tagline
+            binding.let {
+                binding.itemImage.let { image ->
                     Glide.with(it.root)
                         .load(beer.imageUrl)
                         .centerInside()
