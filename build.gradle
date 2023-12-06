@@ -2,9 +2,9 @@
 buildscript {
     ext {
         // Sdk and tools
-        compileSdkVersion = 31
+        compileSdkVersion = 34
         minSdkVersion = 21
-        targetSdkVersion = 31
+        targetSdkVersion = 34
 
         // App dependencies
         gradleVersion = '7.0.4'
@@ -18,9 +18,9 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:7.0.4"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.2"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:2.40.5"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.7.5"
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.49'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
